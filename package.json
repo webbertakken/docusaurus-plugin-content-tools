@@ -1,0 +1,55 @@
+{
+  "name": "docusaurus-plugin-content-tools",
+  "version": "0.1.0",
+  "description": "Easy overview with routes to your tools",
+  "keywords": [
+    "docusaurus",
+    "plugin",
+    "theme",
+    "tools",
+    "homepage"
+  ],
+  "homepage": "https://github.com/webbertakken/docusaurus-plugin-content-tools",
+  "bugs": "https://github.com/webbertakken/docusaurus-plugin-content-tools/issues",
+  "repository": "https://github.com/webbertakken/docusaurus-plugin-content-tools.git",
+  "author": "Webber <webber.nl@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "main": "lib/index.js",
+  "types": "src/types/index.d.ts",
+  "files": [
+    "src/*",
+    "lib/*"
+  ],
+  "scripts": {
+    "build": "concurrently yarn:build:plugin yarn:build:theme yarn:build:assets",
+    "watch": "concurrently \"yarn:build:plugin --watch\" \"yarn:build:theme --watch\" \"yarn:build:assets --watch\"",
+    "build:plugin": "tsc",
+    "build:theme": "tsc --build tsconfig.theme.json",
+    "build:assets": "node scripts/copyUntypedFiles.mjs"
+  },
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-beta.21",
+    "@docusaurus/theme-classic": "^2.0.0-beta.21",
+    "@docusaurus/theme-common": "2.0.0-beta.21",
+    "@docusaurus/theme-translations": "2.0.0-beta.21",
+    "@docusaurus/types": "2.0.0-beta.21",
+    "@docusaurus/utils-validation": "^2.0.0-beta.21"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^2.0.0-beta.21",
+    "@octokit/types": "^6.34.0",
+    "@types/node": "^17.0.35",
+    "@types/react": "^18.0.10",
+    "chokidar": "^3.5.3",
+    "classnames": "^2.3.1",
+    "concurrently": "^7.2.1",
+    "fs-extra": "^10.1.0",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4||^17.0.0||^18.0.0",
+    "react-dom": "^16.8.4||^17.0.0||^18.0.0"
+  }
+}
