@@ -25,7 +25,25 @@
     "watch": "concurrently \"yarn:build:plugin --watch\" \"yarn:build:theme --watch\" \"yarn:build:assets --watch\"",
     "build:plugin": "tsc",
     "build:theme": "tsc --build tsconfig.theme.json",
-    "build:assets": "node scripts/copyUntypedFiles.mjs"
+    "build:assets": "node scripts/copyUntypedFiles.mjs",
+    "test": "node scripts/ensure-husky.mjs && vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "yarn oxlint --deny-warnings --report-unused-disable-directives",
+    "format": "oxfmt --write",
+    "format:check": "oxfmt --check",
+    "typecheck": "tsc --noEmit",
+    "typecheck:tsgo": "tsgo --noEmit",
+    "setup:hooks": "node scripts/ensure-husky.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx|mts|js|jsx|mjs|cjs)": [
+      "oxlint --fix --quiet",
+      "oxfmt --write"
+    ],
+    "*.@(json|jsonc|json5|md|mdx|yaml|yml|css|scss|sass|html|toml)": "oxfmt --write",
+    ".github/workflows/*.@(yml|yaml)": "actionlint"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.21",
@@ -40,12 +58,22 @@
     "@octokit/types": "^6.34.0",
     "@types/node": "^17.0.35",
     "@types/react": "^18.0.10",
+    "@typescript/native-preview": "^7.0.0-dev.20260505.1",
+    "@vitest/coverage-istanbul": "^3",
     "chokidar": "^3.5.3",
     "classnames": "^2.3.1",
     "concurrently": "^7.2.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-unicorn": "^64.0.0",
     "fs-extra": "^10.1.0",
-    "prettier": "^2.6.2",
-    "typescript": "^4.6.4"
+    "happy-dom": "^20.9.0",
+    "husky": "9",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
+    "typescript": "^5",
+    "vite": "^6",
+    "vitest": "^3"
   },
   "peerDependencies": {
     "react": "^16.8.4||^17.0.0||^18.0.0",
