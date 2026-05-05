@@ -36,6 +36,9 @@ export const getToolsMapping = async (
     const absolutePath = `${path}/${tool}`
     const webpackPath = `${toolsFolder}/${tool}`
 
+    // Sequential stat is fine: the tool list is small and the order
+    // needs to match readdir() output for deterministic route registration.
+    // eslint-disable-next-line no-await-in-loop
     const isDirectory = await isDir(absolutePath)
     if (!isDirectory) continue
 

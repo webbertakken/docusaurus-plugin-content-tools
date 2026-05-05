@@ -15,14 +15,13 @@ interface Options extends PluginOptions {
   toolPageComponent: string
 }
 
-export default async function tools(context: LoadContext, options: Options): Promise<Plugin> {
-  const { enabled, verbose, toolsFolder, toolOverviewPageComponent, toolPageComponent } = options
+export default async function toolsPlugin(context: LoadContext, options: Options): Promise<Plugin> {
+  const { enabled, verbose, toolsFolder, toolOverviewPageComponent } = options
 
   // Disabled
   if (!enabled) return { name: 'docusaurus-plugin-content-tools' }
 
   const mapping = await getToolsMapping(context, toolsFolder, verbose)
-  // @ts-ignore
 
   return {
     name: 'docusaurus-plugin-content-tools',
@@ -39,19 +38,23 @@ export default async function tools(context: LoadContext, options: Options): Pro
       if (verbose) console.log('--- Tools ---')
 
       if (verbose) console.log(`Importing tools mapping.`)
-      const tools = toolsMenu(mapping)
+      const loadedTools = toolsMenu(mapping)
 
-      if (verbose) console.log(`Loading ${tools.length || 0} tools.`)
-      return { tools }
+      if (verbose) console.log(`Loading ${loadedTools.length || 0} tools.`)
+      return { tools: loadedTools }
     },
 
     async contentLoaded({ content, actions }) {
-      const { tools } = content as { tools: Tools }
+      const { tools: loadedTools } = content as { tools: Tools }
 
-      // Overview page
+      // Overview page — strip the component reference from the route
+      // payload (consumers don't need the component path on the index).
       const toolsData = await actions.createData(
         `tools-index.json`,
-        JSON.stringify(tools.map(({ component, ...rest }) => rest)),
+        JSON.stringify(
+          // eslint-disable-next-line no-unused-vars
+          loadedTools.map(({ component, ...rest }) => rest),
+        ),
       )
 
       actions.addRoute({
@@ -61,10 +64,13 @@ export default async function tools(context: LoadContext, options: Options): Pro
         modules: { tools: toolsData },
       })
 
-      // Tool pages
-      for (const toolMeta of tools) {
+      // Tool pages — sequential await is intentional; the docusaurus
+      // `actions.createData` writes JSON files and we want them written
+      // in deterministic order to keep the route map stable.
+      for (const toolMeta of loadedTools) {
         const { name, slug, component } = toolMeta
 
+        // eslint-disable-next-line no-await-in-loop -- ordered writes
         const toolData = await actions.createData(
           `tool-${slug}.json`,
           JSON.stringify({ name, slug }),
