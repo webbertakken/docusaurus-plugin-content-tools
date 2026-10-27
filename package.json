@@ -65,7 +65,7 @@
     "concurrently": "^7.2.1",
     "eslint": "^10.3.0",
     "eslint-plugin-unicorn": "^64.0.0",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.0.0",
     "happy-dom": "^21.0.0",
     "husky": "9",
     "lint-staged": "^16.4.0",
