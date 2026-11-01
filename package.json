@@ -73,7 +73,7 @@
     "oxlint": "^1.63.0",
     "typescript": "^5",
     "vite": "^6",
-    "vitest": "^3"
+    "vitest": "^4.0.0"
   },
   "peerDependencies": {
     "react": "^16.8.4||^17.0.0||^18.0.0",
