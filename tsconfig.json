@@ -41,7 +41,7 @@
     "noUnusedParameters": false,
 
     /* Module Resolution */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "types": ["node"],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
