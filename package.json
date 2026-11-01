@@ -71,7 +71,7 @@
     "lint-staged": "^17.0.0",
     "oxfmt": "^0.48.0",
     "oxlint": "^1.63.0",
-    "typescript": "^5",
+    "typescript": "^7.0.0",
     "vite": "^6",
     "vitest": "^5.0.5"
   },
@@ -79,7 +79,7 @@
     "react": "^18.0.0||^19.0.0",
     "react-dom": "^18.0.0||^19.0.0"
   },
-  "packageManager": "yarn@4.14.1",
+  "packageManager": "yarn@4.18.1",
   "dependenciesMeta": {
     "core-js": {
       "built": true
