@@ -92,6 +92,6 @@
     "serialize-javascript@npm:^6.0.1": "^7.1.4",
     "serve-handler@npm:^6.1.7": "patch:serve-handler@npm%3A6.1.7#~/.yarn/patches/serve-handler-npm-6.1.7-b26917d24b.patch",
     "tinypool@npm:^1.0.2": "^2.2.0",
-    "uuid@npm:^8.3.2": "^11.1.1"
+    "uuid@npm:^8.3.2": "^14.0.0"
   }
 }
