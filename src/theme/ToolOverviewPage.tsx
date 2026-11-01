@@ -8,7 +8,7 @@ interface Props {
   tools: Tools
 }
 
-const ToolOverviewPage = ({ tools }: Props): JSX.Element => {
+const ToolOverviewPage = ({ tools }: Props): React.JSX.Element => {
   return (
     <ToolPageLayout title="Tools">
       <ul>
