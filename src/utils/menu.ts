@@ -8,4 +8,4 @@ export const toolsMenu = (tools: ToolsMapping): Tools =>
       slug: slugify(name),
       component,
     }))
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .toSorted((a, b) => a.name.localeCompare(b.name))
